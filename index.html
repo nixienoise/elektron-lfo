@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Elektron LFO Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <h1>Elektron LFO Calculator</h1>
+    <div id="app">
+      <form action="">
+        <div>
+          <label>BPM:</label>
+          <input
+            type="text"
+            placeholder="120"
+            :value="bpm"
+            @input="onBpmInput"
+          />
+          (Beat duration: {{beatDuration}}s, bar duration: {{barDuration}}s)
+        </div>
+        <div>
+          <label>LFO Speed:</label>
+          <input
+            type="text"
+            placeholder="1.0"
+            :value="lfoSpeed"
+            @input="onLfoSpeedInput"
+          />
+        </div>
+        <div>
+          <label>LFO Multiplier:</label>
+          <select :value="multiplier" @input="onMultiplierChange">
+            <option v-for="(m, index) in multipliers" :value="index">
+              {{ m.label }}
+            </option>
+          </select>
+        </div>
+      </form>
+
+      <div>Musical Rate: {{ rateOut }}</div>
+      <div>Time: {{ timeOut }}s</div>
+      <div>Hz: {{ hertzOut }}</div>
+      <hr />
+      <div>
+        Speed Multipliers:
+        <table>
+          <thead>
+            <th>Multiplier</th>
+            <th>Notation</th>
+            <th>Hertz</th>
+          </thead>
+
+          <tr v-for="(m, index) in multipliers" :key="index">
+            <td>{{m.label}}</td>
+            <td>{{calculateNotationFor(index)}}</td>
+            <td>{{calculateHertzFor(index)}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script src="calc.js"></script>
+  </body>
+</html>
