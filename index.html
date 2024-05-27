@@ -10,58 +10,52 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
   <body>
-    <h1>Elektron LFO Calculator</h1>
     <div id="app">
+      <h1>Elektron LFO Calculator</h1>
       <form action="">
         <div>
           <label>BPM:</label>
-          <input
-            type="text"
-            placeholder="120"
-            :value="bpm"
-            @input="onBpmInput"
-          />
-          (Beat duration: {{beatDuration}}s, bar duration: {{barDuration}}s)
+          <input type="text" placeholder="120" :value="bpm" @input="onBpmInput" />
         </div>
         <div>
           <label>LFO Speed:</label>
-          <input
-            type="text"
-            placeholder="1.0"
-            :value="lfoSpeed"
-            @input="onLfoSpeedInput"
-          />
+          <input type="text" placeholder="1.0" :value="lfoSpeed" @input="onLfoSpeedInput" />
         </div>
         <div>
           <label>LFO Multiplier:</label>
           <select :value="multiplier" @input="onMultiplierChange">
-            <option v-for="(m, index) in multipliers" :value="index">
-              {{ m.label }}
-            </option>
+            <option v-for="(m, index) in multipliers" :value="index">{{ m.label }}</option>
           </select>
         </div>
       </form>
 
-      <div>Musical Rate: {{ rateOut }}</div>
-      <div>Time: {{ timeOut }}s</div>
-      <div>Hz: {{ hertzOut }}</div>
+      <div id="results">
+        <div><strong>Beat Duration:</strong> {{beatDuration}}s</div>
+        <div><strong>Bar Duration: </strong> {{barDuration}}s</div>
+        <div><strong>LFO Cycle Rate:</strong> {{ rateOut }}</div>
+        <div><strong>Time:</strong> {{ timeOut }}s</div>
+        <div><strong>Hz:</strong> {{ hertzOut }}</div>
+      </div>
       <hr />
       <div>
-        Speed Multipliers:
         <table>
           <thead>
             <th>Multiplier</th>
-            <th>Notation</th>
+            <th>Rate</th>
+            <th>Seconds</th>
             <th>Hertz</th>
           </thead>
 
           <tr v-for="(m, index) in multipliers" :key="index">
-            <td>{{m.label}}</td>
+            <td><strong>{{m.label}}</strong></td>
             <td>{{calculateNotationFor(index)}}</td>
+            <td>{{sensibleFixedNum(calculateTimeFor(index))}}</td>
             <td>{{calculateHertzFor(index)}}</td>
           </tr>
         </table>
       </div>
+      <hr />
+      <footer>A <a href="https://nixienoise.com/">Nixienoise</a> thing.</footer>
     </div>
     <script src="calc.js"></script>
   </body>

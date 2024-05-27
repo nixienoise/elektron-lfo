@@ -1,0 +1,76 @@
+body {
+  background: #101010;
+  color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+  padding: 10px;
+}
+
+#app {
+  max-width: 50em;
+  margin: 0 auto;
+}
+
+#results div {
+  margin-bottom: 15px;
+}
+
+form {
+  margin-bottom: 25px;
+}
+
+form div {
+  padding: 15px 0;
+}
+
+form label {
+  display: inline-block;
+  min-width: 125px;
+  font-weight: bold;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #222;
+}
+
+form input,
+form select {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  font-size: 1em;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #da0;
+  margin: 25px 0;
+}
+
+table {
+  margin-top: 25px;
+  width: 100%;
+  max-width: 35em;
+  border-spacing: 0;
+}
+
+table th {
+  padding: 0 0 15px 0px;
+}
+
+table td {
+  padding: 7px 30px 7px 0px;
+  border-bottom: 1px solid #333;
+}
+
+table th,
+table td {
+  text-align: left;
+}
+
+footer {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 50px;
+}
+
+footer a {
+  color: yellow;
+}

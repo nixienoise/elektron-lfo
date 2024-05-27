@@ -161,8 +161,8 @@ createApp({
 
     function calculateRates() {
       const index = multiplier.value;
-      rateOut.value = calculateRateFor(index);
-      timeOut.value = calculateTimeFor(index);
+      rateOut.value = sensibleFixedNum(calculateRateFor(index));
+      timeOut.value = sensibleFixedNum(calculateTimeFor(index));
       hertzOut.value = calculateHertzFor(index);
     }
 
@@ -223,8 +223,10 @@ createApp({
       rateOut,
       hertzOut,
 
+      sensibleFixedNum,
       calculateNotationFor,
       calculateHertzFor,
+      calculateTimeFor,
     };
   },
 }).mount("#app");
