@@ -24,7 +24,7 @@ form div {
 
 form label {
   display: inline-block;
-  min-width: 125px;
+  min-width: 200px;
   font-weight: bold;
   padding-bottom: 5px;
   border-bottom: 1px solid #222;
@@ -72,5 +72,5 @@ footer {
 }
 
 footer a {
-  color: yellow;
+  color: #eb0;
 }

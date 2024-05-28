@@ -135,9 +135,9 @@ createApp({
     const multipliers = ref(multipliersData);
     const multiplier = ref(5);
 
-    const timeOut = ref();
+    const time = ref();
     const rateOut = ref();
-    const hertzOut = ref();
+    const hertz = ref();
 
     function onBpmInput(e) {
       bpm.value = e.target.value;
@@ -159,11 +159,40 @@ createApp({
       calculateRates();
     }
 
+    function onTimeInput(e) {
+      time.value = parseFloat(e.target.value);
+      const res = calculateRateFromTime(time.value);
+
+      console.log(`${res.speed}; multiplier: ${multipliersData[res.multiplier].mult}`);
+
+      if (res.speed <= 64) {
+        lfoSpeed.value = res.speed;
+        multiplier.value = res.multiplier;
+        hertz.value = calculateHertzFor(res.multiplier);
+      }
+
+      //   console.log(1 / ((t / barDuration.value) * multipliersData[multiplier.value].mult) / speedMultiplier);
+      //   console.log(t);
+    }
+
+    function onHertzInput(e) {
+      hertz.value = parseFloat(e.target.value);
+      const res = calculateRateFromTime(1 / hertz.value);
+
+      console.log(`${res.speed}; multiplier: ${multipliersData[res.multiplier].mult}`);
+
+      if (res.speed <= 64) {
+        lfoSpeed.value = res.speed;
+        multiplier.value = res.multiplier;
+        time.value = 1 / hertz.value;
+      }
+    }
+
     function calculateRates() {
       const index = multiplier.value;
-      rateOut.value = sensibleFixedNum(calculateRateFor(index));
-      timeOut.value = sensibleFixedNum(calculateTimeFor(index));
-      hertzOut.value = calculateHertzFor(index);
+      rateOut.value = calculateNotationFor(index);
+      time.value = sensibleFixedNum(calculateTimeFor(index));
+      hertz.value = calculateHertzFor(index);
     }
 
     // While this function is called a lot, there are only 24 index options
@@ -171,6 +200,26 @@ createApp({
     function calculateRateFor(multiplierIndex) {
       let x = lfoSpeed.value * speedMultiplier;
       return 1 / x / multipliersData[multiplierIndex].mult;
+    }
+
+    function calculateRateFromTime(timeIn) {
+      let t = timeIn;
+      let o = 0;
+      let i = 0;
+
+      for (i = 0; i < 12; i++) {
+        let m = multipliersData[i];
+
+        o = 1 / ((t / barDuration.value) * m.mult) / speedMultiplier;
+        if (o <= 64) {
+          break;
+        }
+      }
+
+      return {
+        speed: o,
+        multiplier: i,
+      };
     }
 
     function sensibleFixedNum(input) {
@@ -196,7 +245,7 @@ createApp({
         duration = 2;
       }
 
-      return (rate / 1) * duration;
+      return rate * duration;
     }
 
     function calculateHertzFor(multiplierIndex) {
@@ -214,14 +263,16 @@ createApp({
       onLfoSpeedInput,
       onMultiplierChange,
       onBpmInput,
+      onTimeInput,
+      onHertzInput,
 
       multipliers,
       multiplier,
       lfoSpeed,
 
-      timeOut,
+      time,
       rateOut,
-      hertzOut,
+      hertz,
 
       sensibleFixedNum,
       calculateNotationFor,

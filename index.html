@@ -18,24 +18,32 @@
           <input type="number" placeholder="120" :value="bpm" @input="onBpmInput" />
         </div>
         <div>
-          <label>LFO Speed:</label>
+          <label>SPD:</label>
           <input type="number" placeholder="1.0" :value="lfoSpeed" @input="onLfoSpeedInput" />
         </div>
         <div>
-          <label>LFO Multiplier:</label>
+          <label>MULT:</label>
           <select :value="multiplier" @input="onMultiplierChange">
             <option v-for="(m, index) in multipliers" :value="index">{{ m.label }}</option>
           </select>
         </div>
-      </form>
 
-      <div id="results">
-        <div><strong>Beat Duration:</strong> {{beatDuration}}s</div>
-        <div><strong>Bar Duration: </strong> {{barDuration}}s</div>
-        <div><strong>LFO Cycle Rate:</strong> {{ rateOut }}</div>
-        <div><strong>Time:</strong> {{ timeOut }}s</div>
-        <div><strong>Hz:</strong> {{ hertzOut }}</div>
-      </div>
+        <div id="results">
+          <p><strong>Beat Duration:</strong> {{beatDuration}}s</p>
+          <p><strong>Bar Duration: </strong> {{barDuration}}s</p>
+          <p><strong>LFO Cycle Rate:</strong> {{ rateOut }}</p>
+          <div>
+            <label>Time:</label>
+            <input type="number" placeholder="1.0" :value="time" @input="onTimeInput" step="any" />
+          </div>
+          <div>
+            <label>Hz:</label>
+            <input type="number" placeholder="1.0" :value="hertz" @input="onHertzInput" step="any" />
+          </div>
+          <p><strong>Time:</strong> {{ time }}s</p>
+          <p><strong>Hz:</strong> {{ hertz }}</p>
+        </div>
+      </form>
       <hr />
       <div>
         <table>
@@ -55,7 +63,10 @@
         </table>
       </div>
       <hr />
-      <footer>A <a href="https://nixienoise.com/">Nixienoise</a> thing.</footer>
+      <footer>
+        <p>A <a href="https://nixienoise.com/">Nixienoise</a> thing by Alex Roberts, 2024.</p>
+        <p><a href="https://github.com/nixienoise/elektron-lfo">Source</a></p>
+      </footer>
     </div>
     <script src="calc.js"></script>
   </body>
