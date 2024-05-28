@@ -15,11 +15,11 @@
       <form action="">
         <div>
           <label>BPM:</label>
-          <input type="number" placeholder="120" :value="bpm" @input="onBpmInput" />
+          <input type="number" :value="bpm" @input="onBpmInput" />
         </div>
         <div>
           <label>SPD:</label>
-          <input type="number" placeholder="1.0" :value="lfoSpeed" @input="onLfoSpeedInput" />
+          <input type="number" :value="lfoSpeed" @input="onLfoSpeedInput" />
         </div>
         <div>
           <label>MULT:</label>
@@ -33,15 +33,13 @@
           <p><strong>Bar Duration: </strong> {{barDuration}}s</p>
           <p><strong>LFO Cycle Rate:</strong> {{ rateOut }}</p>
           <div>
-            <label>Time:</label>
-            <input type="number" placeholder="1.0" :value="time" @input="onTimeInput" step="any" />
+            <label>Seconds:</label>
+            <input type="number" :value="time" @input="onTimeInput" step="any" />
           </div>
           <div>
-            <label>Hz:</label>
-            <input type="number" placeholder="1.0" :value="hertz" @input="onHertzInput" step="any" />
+            <label>Hertz:</label>
+            <input type="number" :value="hertz" @input="onHertzInput" step="any" />
           </div>
-          <p><strong>Time:</strong> {{ time }}s</p>
-          <p><strong>Hz:</strong> {{ hertz }}</p>
         </div>
       </form>
       <hr />

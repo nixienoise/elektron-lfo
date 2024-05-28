@@ -161,30 +161,35 @@ createApp({
 
     function onTimeInput(e) {
       time.value = parseFloat(e.target.value);
-      const res = calculateRateFromTime(time.value);
+      const res = calculateSpeedFromTime(time.value);
 
       console.log(`${res.speed}; multiplier: ${multipliersData[res.multiplier].mult}`);
 
       if (res.speed <= 64) {
         lfoSpeed.value = res.speed;
         multiplier.value = res.multiplier;
-        hertz.value = calculateHertzFor(res.multiplier);
+        calculateRates();
+      } else {
+        lfoSpeed.value = "";
+        hertz.value = "";
+        rateOut.value = "";
       }
-
-      //   console.log(1 / ((t / barDuration.value) * multipliersData[multiplier.value].mult) / speedMultiplier);
-      //   console.log(t);
     }
 
     function onHertzInput(e) {
       hertz.value = parseFloat(e.target.value);
-      const res = calculateRateFromTime(1 / hertz.value);
+      const res = calculateSpeedFromTime(1 / hertz.value);
 
       console.log(`${res.speed}; multiplier: ${multipliersData[res.multiplier].mult}`);
 
       if (res.speed <= 64) {
         lfoSpeed.value = res.speed;
         multiplier.value = res.multiplier;
-        time.value = 1 / hertz.value;
+        calculateRates();
+      } else {
+        lfoSpeed.value = "";
+        time.value = "";
+        rateOut.value = "";
       }
     }
 
@@ -202,7 +207,7 @@ createApp({
       return 1 / x / multipliersData[multiplierIndex].mult;
     }
 
-    function calculateRateFromTime(timeIn) {
+    function calculateSpeedFromTime(timeIn) {
       let t = timeIn;
       let o = 0;
       let i = 0;
