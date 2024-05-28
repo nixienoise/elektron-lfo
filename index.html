@@ -7,11 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="vue.global.js"></script>
+    <script src="calc.js"></script>
   </head>
   <body>
     <div id="app">
-      <h1>Elektron LFO Calculator</h1>
+      <h1><em>Elektron</em> LFO Calculator</h1>
       <form action="">
         <div>
           <label>BPM:</label>
@@ -29,8 +30,8 @@
         </div>
 
         <div id="results">
-          <p><strong>Beat Duration:</strong> {{beatDuration}}s</p>
-          <p><strong>Bar Duration: </strong> {{barDuration}}s</p>
+          <p><strong>Beat Duration:</strong> {{sensibleFixedNum(beatDuration)}}s</p>
+          <p><strong>Bar Duration: </strong> {{sensibleFixedNum(barDuration)}}s</p>
           <p><strong>LFO Cycle Rate:</strong> {{ rateOut }}</p>
           <div>
             <label>Seconds:</label>
@@ -66,6 +67,9 @@
         <p><a href="https://github.com/nixienoise/elektron-lfo">Source</a></p>
       </footer>
     </div>
-    <script src="calc.js"></script>
+
+    <script>
+      //   window.addEventListener("load", () => init());
+    </script>
   </body>
 </html>
